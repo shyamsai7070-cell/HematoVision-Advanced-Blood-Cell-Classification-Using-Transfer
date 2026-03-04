@@ -1,0 +1,202 @@
+<!-- templates/result.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HematoVision - Prediction Result</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 600px;
+      }
+
+      header {
+        text-align: center;
+        color: white;
+        margin-bottom: 30px;
+      }
+
+      header h1 {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+
+      header p {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      .result-box {
+        background-color: #ffffff;
+        padding: 50px 40px;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .result-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+      }
+
+      .result-box h2 {
+        font-size: 28px;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        font-weight: 600;
+      }
+
+      .result-content {
+        margin-bottom: 30px;
+      }
+
+      .prediction-label {
+        font-size: 14px;
+        color: #7f8c8d;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .predicted-class {
+        font-size: 32px;
+        font-weight: 700;
+        color: #667eea;
+        padding: 20px;
+        background: linear-gradient(
+          135deg,
+          rgba(102, 126, 234, 0.1) 0%,
+          rgba(118, 75, 162, 0.1) 100%
+        );
+        border-radius: 12px;
+        margin-bottom: 25px;
+      }
+
+      .result-box img {
+        max-width: 100%;
+        border-radius: 12px;
+        margin: 30px 0;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease;
+      }
+
+      .result-box img:hover {
+        transform: scale(1.02);
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 15px;
+        margin-top: 35px;
+      }
+
+      a,
+      button {
+        flex: 1;
+        display: inline-block;
+        padding: 14px 28px;
+        font-size: 16px;
+        text-decoration: none;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: scale(1.02);
+        box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-secondary {
+        background: #f0f3f7;
+        color: #667eea;
+        border: 2px solid #667eea;
+      }
+
+      .btn-secondary:hover {
+        background: #667eea;
+        color: white;
+        transform: scale(1.02);
+      }
+
+      .info-footer {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #ecf0f1;
+        color: #95a5a6;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>✓ Analysis Complete</h1>
+        <p>Blood Cell Classification Result</p>
+      </header>
+
+      <div class="result-box">
+        <h2>Prediction Result</h2>
+
+        <div class="result-content">
+          <p class="prediction-label">🔬 Detected Cell Type : Eosinophil</p>
+          <div class="predicted-class">{{ predicted_class }}</div>
+        </div>
+
+        <img src="static/_0_196.jpeg" alt="Uploaded and Analyzed Image" />
+
+        <div class="action-buttons">
+          <a href="{{ url_for('upload_file') }}" class="btn-primary"
+            >🔄 Analyze Another</a
+          >
+          <button class="btn-secondary" onclick="downloadImage()">
+            📥 Download
+          </button>
+        </div>
+
+        <div class="info-footer">
+          <p>Classification powered by Advanced Transfer Learning Model</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function downloadImage() {
+        const link = document.createElement("a");
+        link.href = document.querySelector("img").src;
+        link.download = "blood_cell_analysis.jpg";
+        link.click();
+      }
+    </script>
+  </body>
+</html>

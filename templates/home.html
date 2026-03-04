@@ -1,0 +1,211 @@
+<!-- templates/home.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HematoVision - Blood Cell Classification</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 550px;
+      }
+
+      header {
+        text-align: center;
+        color: white;
+        margin-bottom: 40px;
+      }
+
+      header h1 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        letter-spacing: -0.5px;
+      }
+
+      header p {
+        font-size: 16px;
+        opacity: 0.9;
+        font-weight: 300;
+      }
+
+      .upload-box {
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        padding: 50px 40px;
+        text-align: center;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .upload-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+      }
+
+      .upload-box h2 {
+        margin-bottom: 15px;
+        font-size: 28px;
+        color: #2c3e50;
+        font-weight: 600;
+      }
+
+      .upload-box .subtitle {
+        color: #7f8c8d;
+        font-size: 14px;
+        margin-bottom: 35px;
+        font-weight: 300;
+      }
+
+      .upload-icon {
+        font-size: 60px;
+        margin-bottom: 20px;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .file-input-wrapper {
+        position: relative;
+        margin: 30px 0;
+      }
+
+      .file-input-label {
+        display: inline-block;
+        padding: 15px 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        font-size: 15px;
+        border: 2px solid transparent;
+      }
+
+      .file-input-label:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .file-name {
+        margin-top: 15px;
+        font-size: 13px;
+        color: #27ae60;
+        font-weight: 500;
+        min-height: 18px;
+      }
+
+      button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        padding: 14px 40px;
+        font-size: 16px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      button:hover {
+        transform: scale(1.02);
+        box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+      }
+
+      button:active {
+        transform: scale(0.98);
+      }
+
+      .info-text {
+        margin-top: 30px;
+        color: #95a5a6;
+        font-size: 12px;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🔬 HematoVision</h1>
+        <p>Advanced Blood Cell Classification Using AI</p>
+      </header>
+
+      <div class="upload-box">
+        <div class="upload-icon">🩸</div>
+        <h2>Upload Blood Cell Image</h2>
+        <p class="subtitle">
+          Analyze and classify blood cells using advanced deep learning
+        </p>
+
+        <form method="POST" enctype="multipart/form-data">
+          <div class="file-input-wrapper">
+            <label for="file-input" class="file-input-label">
+              📁 Choose Image
+            </label>
+            <input
+              type="file"
+              id="file-input"
+              name="file"
+              accept="image/*"
+              required
+              onchange="updateFileName(this)"
+            />
+            <div class="file-name" id="file-name"></div>
+          </div>
+
+          <button type="submit">🚀 Analyze & Predict</button>
+        </form>
+
+        <div class="info-text">
+          <p>✓ Supports JPG, PNG, and other image formats</p>
+          <p>✓ Fast analysis powered by transfer learning</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function updateFileName(input) {
+        const fileName = document.getElementById("file-name");
+        if (input.files && input.files[0]) {
+          fileName.textContent = "✓ " + input.files[0].name;
+        }
+      }
+    </script>
+  </body>
+</html>
